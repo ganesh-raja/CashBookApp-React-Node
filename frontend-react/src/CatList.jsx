@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CatList = ({id, cat, api, catActive, setCatActive, loginStatus}) => {  
+const CatList = ({ id, cat, api, catActive, setCatActive, loginStatus }) => {
   const bookId = id
 
   const editCategory = async (id, oldName) => {
@@ -14,7 +14,7 @@ const CatList = ({id, cat, api, catActive, setCatActive, loginStatus}) => {
     setCatActive(!catActive)
   }
 
-  const deleteCategory = async(id) => {
+  const deleteCategory = async (id) => {
     if (!confirm("Delete this category?")) return;
     await fetch(`${api}/books/${bookId}/categories/${id}`, {
       method: "DELETE",
@@ -24,9 +24,9 @@ const CatList = ({id, cat, api, catActive, setCatActive, loginStatus}) => {
   }
 
   return (
-    <li className='cat-list-li'>{cat.name} 
-    <button type='button' className="editcat" onClick={()=>editCategory(cat._id, cat.name)}>Edit</button>
-    <button type='button' className="deletecat" onClick={()=>deleteCategory(cat._id)}>Delete</button>
+    <li className='cat-list-li'>{cat.name}
+      <button type='button' className="editcat" onClick={() => editCategory(cat._id, cat.name)}>Edit</button>
+      <button type='button' className="deletecat" onClick={() => deleteCategory(cat._id)}>Delete</button>
     </li>
   )
 }

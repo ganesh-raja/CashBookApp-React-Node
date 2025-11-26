@@ -1,15 +1,15 @@
 import React from 'react'
 
-const AddBook = ({api, loginStatus, bookStatus, setBookStatus}) => {  
+const AddBook = ({ api, loginStatus, bookStatus, setBookStatus }) => {
 
-  const BookAdd = async() => {    
+  const BookAdd = async () => {
     const title = prompt("Enter book title:");
     if (!title) return;
     const description = prompt("Enter description:");
-    await fetch(`${api}/books`, {   
-        method: "POST",    
-        headers: { "Content-Type": "application/json", Authorization: `Bearer ${loginStatus}` },
-        body: JSON.stringify({ title, description }),
+    await fetch(`${api}/books`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", Authorization: `Bearer ${loginStatus}` },
+      body: JSON.stringify({ title, description }),
     });
     setBookStatus(!bookStatus)
   }

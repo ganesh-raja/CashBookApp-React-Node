@@ -28,7 +28,14 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
     const res = await fetch(`${api}/books/${id}/categories`, {
       headers: { Authorization: `Bearer ${loginStatus}` },
     });
+
     const data = await res.json();
+
+    if (!res.ok) {
+      console.error("Failed to fetch category:", data);
+      LoggedOut();      
+      return;
+    }
 
     const newMap = {};
     const select = document.getElementById("category");
@@ -58,6 +65,7 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
         loginStatus={loginStatus}
         loadCategory={loadCategory}
         categoryMap={categoryMap}
+        LoggedOut={LoggedOut}
       />
       <Category
         id={id}
@@ -69,6 +77,7 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
         catActive={catActive}
         setCatActive={setCatActive}
         handleCategory={handleCategory}
+        LoggedOut={LoggedOut}
       />
     </div>
   )

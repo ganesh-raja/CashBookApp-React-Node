@@ -8,7 +8,7 @@ const Books = ({ api, loginStatus, LoggedOut }) => {
   const [bookStatus, setBookStatus] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 2;
+  const limit = 10;
 
   const fetchBooks = async (page = 1) => {
     const res = await fetch(`${api}/books?page=${page}&limit=${limit}`, {
@@ -19,6 +19,7 @@ const Books = ({ api, loginStatus, LoggedOut }) => {
 
     if (!res.ok) {
       console.error("Failed to fetch books:", data);
+      LoggedOut();      
       return;
     }
 

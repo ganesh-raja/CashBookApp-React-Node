@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import InnerRecords from './InnerRecords'
 
-const Records = ({ api, loginStatus, id, categoryMap }) => {
+const Records = ({ api, loginStatus, id, categoryMap, LoggedOut}) => {
 
   let pageNumber = 1
   let totalPages = 1
@@ -29,7 +29,14 @@ const Records = ({ api, loginStatus, id, categoryMap }) => {
     const res = await fetch(`${api}/books/${bookId}/records?page=${pageNumber}`, {
       headers: { Authorization: `Bearer ${loginStatus}` }
     });
+
     const data = await res.json();
+
+    if (!res.ok) {
+      console.error("Failed to fetch book records:", data);
+      LoggedOut();      
+      return;
+    }
 
     document.getElementById("cashIn").innerText = data.totals.cashIn;
     document.getElementById("cashOut").innerText = data.totals.cashOut;

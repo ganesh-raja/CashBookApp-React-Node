@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Login from './Login'
 import Register from './Register'
-import { Route, Routes, useNavigate } from 'react-router';
+import { Navigate, Route, Routes, useNavigate } from 'react-router';
 import Home from './Home';
 import Books from './Books';
 import BookDetail from './BookDetail';
@@ -34,7 +34,8 @@ function App() {
         <Route path="/register" element={<Register
           api={apiBase}
           navigate={navigate} />} />
-        <Route path="/" element={<Home LoggedOut={LoggedOut} />} />
+        {/* <Route path="/" element={<Home LoggedOut={LoggedOut} />} /> */}
+        <Route path="/" element={<Navigate to="/books" replace />} />
         <Route path="/books">
           <Route index element={<Books
             api={apiBase}

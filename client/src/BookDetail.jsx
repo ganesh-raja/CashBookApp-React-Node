@@ -59,6 +59,7 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
     <div className='book-container'>
       <Link to="/books">Back</Link>
       <button type='button' className="btn logout-btn" onClick={LoggedOut}>Logout</button>
+      <h3 className="bookhead">Book</h3>
       <Records
         id={id}
         api={api}

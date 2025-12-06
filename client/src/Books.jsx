@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import AddBook from './AddBook'
 import BookRow from './BookRow'
+import PopupModel from './PopupModel'
 
 const Books = ({ api, loginStatus, LoggedOut }) => {
+
+  const [modelTitle, setModelTitle] = useState("")
+  const [formElement, setFormElement] = useState(null) 
 
   const [bookData, setBookData] = useState([]);
   const [bookStatus, setBookStatus] = useState(true);
@@ -46,7 +50,10 @@ const Books = ({ api, loginStatus, LoggedOut }) => {
         <button className="btn logout-btn" onClick={LoggedOut}>Logout</button>
       </div>
 
-      <AddBook api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus} />
+      <AddBook api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}        
+        setModelTitle={setModelTitle}
+        setFormElement={setFormElement}        
+      />
 
       <div className="table-wrapper">
         <table className="books-table">
@@ -62,6 +69,8 @@ const Books = ({ api, loginStatus, LoggedOut }) => {
               bookData.map(item =>
                 <BookRow bookData={item} key={item._id} api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
                   setCurrentPage={setCurrentPage}
+                  setModelTitle={setModelTitle}
+                  setFormElement={setFormElement}                  
                 />
               )}
             {bookData.length == 0 &&
@@ -70,6 +79,12 @@ const Books = ({ api, loginStatus, LoggedOut }) => {
           </tbody>
         </table>
       </div>
+
+      <PopupModel api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
+        modelTitle={modelTitle}
+        formElement={formElement}
+        setCurrentPage={setCurrentPage}
+       />
 
       <div className="pagination">
         <button id="prevBtn" className="btn page-btn"

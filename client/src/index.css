@@ -822,7 +822,7 @@ button:disabled {
 
 .recordstable {
   background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(10px);
+  /* backdrop-filter: blur(10px); */
   border-radius: 18px;
   padding: 20px;
   margin-top: 20px;

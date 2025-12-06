@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import InnerRecords from './InnerRecords'
+import PopupModalInner from './PopupModalInner'
 
-const Records = ({ api, loginStatus, id, categoryMap, LoggedOut}) => {
+const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
 
   let pageNumber = 1
   let totalPages = 1
   const bookId = id
+
+  const [recordTitle, setRecordTitle] = useState("")
+  const [recordElement, setRecordElement] = useState(null)
 
   const [records, setRecords] = useState([])
 
@@ -169,6 +173,8 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut}) => {
                   categoryMap={categoryMap}
                   resetRecord={resetRecord}
                   loadRecords={loadRecords}
+                  setRecordTitle={setRecordTitle}
+                  setRecordElement={setRecordElement}
                 />
               )
             }
@@ -179,6 +185,12 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut}) => {
             }
           </tbody>
         </table>
+        <PopupModalInner api={api} loginStatus={loginStatus}
+          resetRecord={resetRecord}
+          loadRecords={loadRecords}
+          recordTitle={recordTitle}
+          recordElement={recordElement}
+        />
         <div className='pagination1'>
           <button id="prevBtn" className="btn page-btn" style={{ "display": "none" }} onClick={() => prevBtn()}>Prev</button>
           <span id="pageInfo" className="page-info"></span>

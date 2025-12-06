@@ -8,8 +8,21 @@ const Register = ({ api, navigate }) => {
     const [regError, setRegError] = useState("")
     const [regSuccess, setRegSuccess] = useState("")
 
+    function isValidEmail(email) {        
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
     const RegisterSubmit = async (e) => {
         e.preventDefault();
+
+        const email = document.getElementById("remail")
+
+        if (!isValidEmail(regEmail)) {
+            alert("Please enter a valid email address.");
+            email.focus();            
+            return;
+        }
 
         try {
             const res = await fetch(`${api}/auth/register`, {

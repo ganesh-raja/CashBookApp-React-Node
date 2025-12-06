@@ -2,10 +2,13 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import Category from './Category'
 import Records from './Records'
+import PopupModel from './PopupModel'
 
 const BookDetail = ({ api, loginStatus, LoggedOut }) => {
-  const { id } = useParams()
-  // console.log({id})
+  const { id } = useParams()   
+
+  const [catTitle, setCatTitle] = useState("")
+  const [catElement, setCatElement] = useState(null)
 
   const [newCategory, setNewCategory] = useState("")
   const [loadCategory, setLoadCategory] = useState([])
@@ -66,7 +69,7 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
         loginStatus={loginStatus}
         loadCategory={loadCategory}
         categoryMap={categoryMap}
-        LoggedOut={LoggedOut}
+        LoggedOut={LoggedOut}        
       />
       <Category
         id={id}
@@ -79,7 +82,15 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
         setCatActive={setCatActive}
         handleCategory={handleCategory}
         LoggedOut={LoggedOut}
+        setCatTitle={setCatTitle}
+        setCatElement={setCatElement}
       />
+       <PopupModel api={api} loginStatus={loginStatus} 
+        modelTitle={catTitle}
+        formElement={catElement}
+        catActive={catActive}
+        setCatActive={setCatActive}       
+       />
     </div>
   )
 }

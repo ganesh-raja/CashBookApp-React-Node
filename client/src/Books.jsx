@@ -3,7 +3,7 @@ import AddBook from './AddBook'
 import BookRow from './BookRow'
 import PopupModel from './PopupModel'
 
-const Books = ({ api, loginStatus, LoggedOut }) => {
+const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
 
   const [modelTitle, setModelTitle] = useState("")
   const [formElement, setFormElement] = useState(null) 
@@ -33,6 +33,13 @@ const Books = ({ api, loginStatus, LoggedOut }) => {
       return
     }
 
+    const newbook = {}
+
+    data.data.map(item => 
+      newbook[item._id] = item.title
+    )
+        
+    setBookName(newbook)
     setBookData(data.data);
     setCurrentPage(data.pagination.page);
     setTotalPages(data.pagination.totalPages);

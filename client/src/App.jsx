@@ -10,6 +10,7 @@ import Error from './Error';
 function App() {
   const navigate = useNavigate();
   const [loginStatus, setLoginStatus] = useState(localStorage.getItem("cashbook_token") || null)
+  const [bookName, setBookName] = useState([])
 
   const apiBase = "http://localhost:4003/api"  
 
@@ -42,12 +43,14 @@ function App() {
           <Route index element={<Books
             api={apiBase}
             loginStatus={loginStatus}
-            LoggedOut={LoggedOut}             
+            LoggedOut={LoggedOut}
+            setBookName={setBookName}             
             />} />
           <Route path=":id" element={<BookDetail
             api={apiBase}
             loginStatus={loginStatus}
             LoggedOut={LoggedOut}
+            bookName={bookName}
           />} />
         </Route>
         <Route path="*" element={<Error />} />        

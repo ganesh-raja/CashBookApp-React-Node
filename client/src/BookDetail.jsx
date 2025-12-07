@@ -4,16 +4,25 @@ import Category from './Category'
 import Records from './Records'
 import PopupModel from './PopupModel'
 
-const BookDetail = ({ api, loginStatus, LoggedOut }) => {
+const BookDetail = ({ api, loginStatus, LoggedOut, bookName }) => {
   const { id } = useParams()   
 
   const [catTitle, setCatTitle] = useState("")
   const [catElement, setCatElement] = useState(null)
-
+  
   const [newCategory, setNewCategory] = useState("")
   const [loadCategory, setLoadCategory] = useState([])
   const [catActive, setCatActive] = useState(false)
   const [categoryMap, setCategoryMap] = useState({})
+  
+  let bookTitle = bookName[id]
+
+  if (bookTitle === undefined) {
+    bookTitle = localStorage.getItem("bookname")
+  }
+  else{
+    localStorage.setItem("bookname", bookTitle)
+  }
 
   const handleCategory = async (e) => {
     e.preventDefault();
@@ -62,7 +71,7 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
     <div className='book-container'>
       <Link to="/books">Back</Link>
       <button type='button' className="btn logout-btn" onClick={LoggedOut}>Logout</button>
-      <h3 className="bookhead">Book</h3>
+      <h3 className="bookhead d-flex justify-content-around">Book {bookTitle &&<span className='text-success'><strong>{bookTitle || ""}</strong></span>}</h3>
       <Records
         id={id}
         api={api}

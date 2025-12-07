@@ -27,7 +27,7 @@ const AddBook = ({ setModelTitle, setFormElement }) => {
   }  
 
   return (
-    <button className="btn add-btn" onClick={openAddForm} type='button' data-bs-toggle='modal' data-bs-target='#popup-modal'>Add Book</button>
+    <button className="btn btn-primary" onClick={openAddForm} type='button' data-bs-toggle='modal' data-bs-target='#popup-modal'>Add Book</button>
   )
 }
 

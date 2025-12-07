@@ -6,13 +6,13 @@ import PopupModel from './PopupModel'
 const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
 
   const [modelTitle, setModelTitle] = useState("")
-  const [formElement, setFormElement] = useState(null) 
+  const [formElement, setFormElement] = useState(null)
 
   const [bookData, setBookData] = useState([]);
   const [bookStatus, setBookStatus] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 10;
+  const limit = 2;
 
   const fetchBooks = async (page = 1) => {
     const res = await fetch(`${api}/books?page=${page}&limit=${limit}`, {
@@ -23,7 +23,7 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
 
     if (!res.ok) {
       console.error("Failed to fetch books:", data);
-      LoggedOut();      
+      LoggedOut();
       return;
     }
 
@@ -35,10 +35,10 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
 
     const newbook = {}
 
-    data.data.map(item => 
+    data.data.map(item =>
       newbook[item._id] = item.title
     )
-        
+
     setBookName(newbook)
     setBookData(data.data);
     setCurrentPage(data.pagination.page);
@@ -51,63 +51,85 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
 
 
   return (
-    <div className="books-container">
-      <div className="books-header">
-        <h3>Books</h3>
-        <button className="btn logout-btn" onClick={LoggedOut}>Logout</button>
+    <div className="container d-flex justify-content-center align-items-center vh-100">
+      <div className="row justify-content-center w-100">
+
+        <div className="container border boder-2 rounded p-4">
+          <div className="row mb-3">
+            <div className="col-12 text-start">
+              <h3>Books</h3>
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div className="col-12 d-flex justify-content-between">
+              <AddBook api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
+                setModelTitle={setModelTitle}
+                setFormElement={setFormElement}
+              />
+
+              <button className="btn btn-outline-danger me-0" onClick={LoggedOut}>Logout</button>
+            </div>
+          </div>
+          <div className="row mb-3">
+            <div className="col">
+              <div className="table-responsive table-rounded">
+                <table className="table table-bordered table-hover table-fixed">
+                  <thead>
+                    <tr>
+                      <th className='table-primary text-center' style={{ "width": "33%" }}>Title</th>
+                      <th className='table-primary text-center' style={{ "width": "33%" }}>Description</th>
+                      <th className='table-primary text-center' style={{ "width": "33%" }}>Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {bookData.length > 0 &&
+                      bookData.map(item =>
+                        <BookRow bookData={item} key={item._id} api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
+                          setCurrentPage={setCurrentPage}
+                          setModelTitle={setModelTitle}
+                          setFormElement={setFormElement}
+                        />
+                      )}
+                    {bookData.length == 0 &&
+                      <tr className='text-center'><td colSpan='3'>No books found</td></tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+
+              <PopupModel api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
+                modelTitle={modelTitle}
+                formElement={formElement}
+                setCurrentPage={setCurrentPage}
+              />
+
+
+              <ul className="pagination justify-content-center">
+                <li className='page-item'>
+                  <button id="prevBtn" className="btn btn-secondary page-link"
+                    disabled={currentPage === 1}
+                    onClick={() => fetchBooks(currentPage - 1)}
+                  >Prev</button>
+                </li>
+                <li className='page-item m-2'>
+                  {totalPages > 0 &&
+                    <span id="pageInfo" className="">
+                      <strong>Page {currentPage} of {totalPages}</strong>
+                    </span>
+                  }
+                </li>
+                <li className='page-item'>
+                  <button id="nextBtn" className="btn btn-secondary page-link"
+                    disabled={currentPage === totalPages || 0 === totalPages}
+                    onClick={() => fetchBooks(currentPage + 1)}
+                  >Next</button>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
-
-      <AddBook api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}        
-        setModelTitle={setModelTitle}
-        setFormElement={setFormElement}        
-      />
-
-      <div className="table-wrapper">
-        <table className="books-table">
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Description</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="bookList">
-            {bookData.length > 0 &&
-              bookData.map(item =>
-                <BookRow bookData={item} key={item._id} api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
-                  setCurrentPage={setCurrentPage}
-                  setModelTitle={setModelTitle}
-                  setFormElement={setFormElement}                  
-                />
-              )}
-            {bookData.length == 0 &&
-              <tr><td colSpan='3' className="no-book">No books found</td></tr>
-            }
-          </tbody>
-        </table>
-      </div>
-
-      <PopupModel api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
-        modelTitle={modelTitle}
-        formElement={formElement}
-        setCurrentPage={setCurrentPage}
-       />
-
-      <div className="pagination">
-        <button id="prevBtn" className="btn page-btn"
-          disabled={currentPage === 1}
-          onClick={() => fetchBooks(currentPage - 1)}
-        >Prev</button>
-        {totalPages > 0 &&
-          <span id="pageInfo" className="page-info">
-            Page {currentPage} of {totalPages}
-          </span>}
-        <button id="nextBtn" className="btn page-btn"
-          disabled={currentPage === totalPages || 0 === totalPages}
-          onClick={() => fetchBooks(currentPage + 1)}
-        >Next</button>
-      </div>
-
     </div>
   )
 }

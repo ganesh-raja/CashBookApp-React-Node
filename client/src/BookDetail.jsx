@@ -68,7 +68,7 @@ const BookDetail = ({ api, loginStatus, LoggedOut, bookName }) => {
   }, [catActive])
 
   return (
-    <div className='book-container'>
+    <div className='container'>
       <Link to="/books">Back</Link>
       <button type='button' className="btn logout-btn" onClick={LoggedOut}>Logout</button>
       <h3 className="bookhead d-flex justify-content-around">Book {bookTitle &&<span className='text-success'><strong>{bookTitle || ""}</strong></span>}</h3>

@@ -54,14 +54,17 @@ const BookRow = ({ bookData, setModelTitle, setFormElement }) => {
     <tr>
       <td>{bookData.title}</td>
       <td>{bookData.description || ''}</td>
-      <td>
-        <Link to={`/books/${bookData._id}`}><button className="openbtn" >Open</button></Link>
-        <button className="editcat" onClick={() => { openEditForm(bookData._id, bookData.title, bookData.description || '') }}
+      <td className='text-center'>
+        <div className='form-group'>
+        <Link to={`/books/${bookData._id}`}><button className="btn btn-info" ><i className="bi bi-folder2-open"></i></button></Link>
+        <button className="btn btn-warning" onClick={() => { openEditForm(bookData._id, bookData.title, bookData.description || '') }}
             data-bs-toggle='modal' data-bs-target='#popup-modal'
-          >Edit</button>
-        <button className="deletecat" onClick={() => { openDelForm(bookData._id, bookData.title) }}
+          ><i className="bi bi-pencil-square"></i></button>
+        <button className="btn btn-danger" onClick={() => { openDelForm(bookData._id, bookData.title) }}
             data-bs-toggle='modal' data-bs-target='#popup-modal'
-          >Delete</button>
+          ><i className="bi bi-trash"></i></button>
+
+        </div>
       </td>
     </tr>
   )

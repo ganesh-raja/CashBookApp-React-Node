@@ -8,8 +8,21 @@ const Register = ({ api, navigate }) => {
     const [regError, setRegError] = useState("")
     const [regSuccess, setRegSuccess] = useState("")
 
+    function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(email);
+    }
+
     const RegisterSubmit = async (e) => {
         e.preventDefault();
+
+        const email = document.getElementById("remail")
+
+        if (!isValidEmail(regEmail)) {
+            alert("Please enter a valid email address.");
+            email.focus();
+            return;
+        }
 
         try {
             const res = await fetch(`${api}/auth/register`, {
@@ -42,28 +55,47 @@ const Register = ({ api, navigate }) => {
     }
 
     return (
-        <form className='registerFrom' onSubmit={RegisterSubmit}>
-            <h4>Create Account</h4>
-            {regSuccess && <span id="sucMsg">{regSuccess}</span>}
-            {regError && <span id="errMsg1">{regError}</span>}
-            <label htmlFor="rname">Name</label>
-            <input type="text" id='rname' name='rname' required autoFocus
-                value={regName}
-                onChange={(e) => setRegName(e.target.value)}
-            />
-            <label htmlFor="remail">Email</label>
-            <input type="text" id='remail' name='remail' required
-                value={regEmail}
-                onChange={(e) => setRegEmail(e.target.value)}
-            />
-            <label htmlFor="lpass">Password</label>
-            <input type="password" id='rpass' name='rpass' required
-                value={regPass}
-                onChange={(e) => setRegPass(e.target.value)}
-            />
-            <button type='submit'>Register</button>
-            <Link to="/login">Already have an account? Login here</Link>
-        </form>
+        <div className="container d-flex justify-content-center align-items-center vh-100">
+            <div className="row justify-content-center w-100">
+                <div className="col-12 col-lg-4 p-4 border border-2 rounded">
+                    <form className='registerFrom' onSubmit={RegisterSubmit}>
+                        <div className='text-center'>
+                            <h4>Create Account</h4>
+                            {regSuccess && <span className='text-success'>{regSuccess}</span>}
+                            {regError && <span className="text-danger">{regError}</span>}
+                        </div>
+                        <hr className='w-100' />
+                        <div className='mt-3'>
+                            <label htmlFor="rname" className='form-label'>Name</label>
+                            <input type="text" id='rname' name='rname' className='form-control' required autoFocus
+                                value={regName}
+                                onChange={(e) => setRegName(e.target.value)}
+                            />
+                        </div>
+                        <div className='mt-3'>
+                            <label htmlFor="remail" className='form-label'>Email</label>
+                            <input type="text" id='remail' name='remail' className='form-control' required
+                                value={regEmail}
+                                onChange={(e) => setRegEmail(e.target.value)}
+                            />
+                        </div>
+                        <div className='mt-3'>
+                            <label htmlFor="lpass" className='form-label'>Password</label>
+                            <input type="password" id='rpass' name='rpass' className='form-control' required
+                                value={regPass}
+                                onChange={(e) => setRegPass(e.target.value)}
+                            />
+                        </div>
+                        <div className='mt-3 text-center'>
+                            <button type='submit' className='btn btn-outline-primary'>Register</button>
+                        </div>
+                        <div className='mt-3 text-center'>
+                            <Link to="/login">Already have an account? Login here</Link>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     )
 }
 

@@ -7,11 +7,13 @@ import Books from './Books';
 import BookDetail from './BookDetail';
 import Error from './Error';
 
-
 function App() {
   const navigate = useNavigate();
   const [loginStatus, setLoginStatus] = useState(localStorage.getItem("cashbook_token") || null)
-  const apiBase = "http://localhost:4003/api"
+  const [bookName, setBookName] = useState([])
+
+  const apiBase = "http://localhost:4003/api"  
+
   useEffect(() => {
     if (loginStatus === null) {
       navigate("/login")
@@ -19,6 +21,7 @@ function App() {
   }, [loginStatus])
 
   const LoggedOut = () => {
+    // if (!confirm("Are you sure to logout?")) return    
     localStorage.removeItem("cashbook_token")
     setLoginStatus(null)
   }
@@ -40,16 +43,18 @@ function App() {
           <Route index element={<Books
             api={apiBase}
             loginStatus={loginStatus}
-            LoggedOut={LoggedOut} />} />
+            LoggedOut={LoggedOut}
+            setBookName={setBookName}             
+            />} />
           <Route path=":id" element={<BookDetail
             api={apiBase}
             loginStatus={loginStatus}
             LoggedOut={LoggedOut}
+            bookName={bookName}
           />} />
         </Route>
-        <Route path="*" element={<Error />} />
-      </Routes>
-
+        <Route path="*" element={<Error />} />        
+      </Routes>            
     </>
   )
 }

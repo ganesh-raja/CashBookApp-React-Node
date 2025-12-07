@@ -2,15 +2,27 @@ import React, { useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router'
 import Category from './Category'
 import Records from './Records'
+import PopupModel from './PopupModel'
 
-const BookDetail = ({ api, loginStatus, LoggedOut }) => {
-  const { id } = useParams()
-  // console.log({id})
+const BookDetail = ({ api, loginStatus, LoggedOut, bookName }) => {
+  const { id } = useParams()   
 
+  const [catTitle, setCatTitle] = useState("")
+  const [catElement, setCatElement] = useState(null)
+  
   const [newCategory, setNewCategory] = useState("")
   const [loadCategory, setLoadCategory] = useState([])
   const [catActive, setCatActive] = useState(false)
   const [categoryMap, setCategoryMap] = useState({})
+  
+  let bookTitle = bookName[id]
+
+  if (bookTitle === undefined) {
+    bookTitle = localStorage.getItem("bookname")
+  }
+  else{
+    localStorage.setItem("bookname", bookTitle)
+  }
 
   const handleCategory = async (e) => {
     e.preventDefault();
@@ -56,17 +68,36 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
   }, [catActive])
 
   return (
-    <div className='book-container'>
-      <Link to="/books">Back</Link>
-      <button type='button' className="btn logout-btn" onClick={LoggedOut}>Logout</button>
-      <h3 className="bookhead">Book</h3>
+    <div className='container p-3'>
+      <div className="row mb-3">
+        <div className="col-12 d-flex justify-content-between mb-3">
+          <Link to="/books" className='btn btn-secondary'>Back</Link>
+          <button type='button' className="btn btn-outline-danger" onClick={LoggedOut}>Logout</button>
+        </div> 
+        <div className="col-12">
+        <div className="card">
+          <div className="card-body">
+            <div className="row">
+              <div className="col-12 col-sm-6 text-stast text-sm-end">
+                <h4>Book</h4>
+              </div>
+              {bookTitle &&
+              <div className="col-12 col-sm-6">
+                <h4><span className='text-success'><strong>{bookTitle || ""}</strong></span></h4>
+              </div>
+              }
+            </div>
+          </div>
+        </div>    
+        </div> 
+      </div>
       <Records
         id={id}
         api={api}
         loginStatus={loginStatus}
         loadCategory={loadCategory}
         categoryMap={categoryMap}
-        LoggedOut={LoggedOut}
+        LoggedOut={LoggedOut}        
       />
       <Category
         id={id}
@@ -79,7 +110,15 @@ const BookDetail = ({ api, loginStatus, LoggedOut }) => {
         setCatActive={setCatActive}
         handleCategory={handleCategory}
         LoggedOut={LoggedOut}
+        setCatTitle={setCatTitle}
+        setCatElement={setCatElement}
       />
+       <PopupModel api={api} loginStatus={loginStatus} 
+        modelTitle={catTitle}
+        formElement={catElement}
+        catActive={catActive}
+        setCatActive={setCatActive}       
+       />
     </div>
   )
 }

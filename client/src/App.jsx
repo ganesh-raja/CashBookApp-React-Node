@@ -37,7 +37,7 @@ function App() {
         <Route path="/register" element={<Register
           api={apiBase}
           navigate={navigate} />} />
-        <Route path="/" element={<Home LoggedOut={LoggedOut} />} />
+        {/* <Route path="/" element={<Home LoggedOut={LoggedOut} />} /> */}
         <Route path="/" element={<Navigate to="/books" replace />} />
         <Route path="/books">
           <Route index element={<Books

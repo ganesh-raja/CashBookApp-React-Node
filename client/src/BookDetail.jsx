@@ -68,10 +68,29 @@ const BookDetail = ({ api, loginStatus, LoggedOut, bookName }) => {
   }, [catActive])
 
   return (
-    <div className='container'>
-      <Link to="/books">Back</Link>
-      <button type='button' className="btn logout-btn" onClick={LoggedOut}>Logout</button>
-      <h3 className="bookhead d-flex justify-content-around">Book {bookTitle &&<span className='text-success'><strong>{bookTitle || ""}</strong></span>}</h3>
+    <div className='container p-3'>
+      <div className="row mb-3">
+        <div className="col-12 d-flex justify-content-between mb-3">
+          <Link to="/books" className='btn btn-secondary'>Back</Link>
+          <button type='button' className="btn btn-outline-danger" onClick={LoggedOut}>Logout</button>
+        </div> 
+        <div className="col-12">
+        <div className="card">
+          <div className="card-body">
+            <div className="row">
+              <div className="col-12 col-sm-6 text-stast text-sm-end">
+                <h4>Book</h4>
+              </div>
+              {bookTitle &&
+              <div className="col-12 col-sm-6">
+                <h4><span className='text-success'><strong>{bookTitle || ""}</strong></span></h4>
+              </div>
+              }
+            </div>
+          </div>
+        </div>    
+        </div> 
+      </div>
       <Records
         id={id}
         api={api}

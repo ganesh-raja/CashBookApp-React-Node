@@ -53,7 +53,6 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="row justify-content-center w-100">
-
         <div className="container border boder-2 rounded p-4">
           <div className="row mb-3">
             <div className="col-12 text-start">
@@ -74,11 +73,11 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
             <div className="col">
               <div className="table-responsive table-rounded">
                 <table className="table table-bordered table-hover table-fixed">
-                  <thead>
+                  <thead className='table-primary text-center'>
                     <tr>
-                      <th className='table-primary text-center' style={{ "width": "33%" }}>Title</th>
-                      <th className='table-primary text-center' style={{ "width": "33%" }}>Description</th>
-                      <th className='table-primary text-center' style={{ "width": "33%" }}>Actions</th>
+                      <th style={{ "width": "33%" }}>Title</th>
+                      <th style={{ "width": "33%" }}>Description</th>
+                      <th style={{ "width": "33%" }}>Actions</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -107,7 +106,7 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
 
               <ul className="pagination justify-content-center">
                 <li className='page-item'>
-                  <button id="prevBtn" className="btn btn-secondary page-link"
+                  <button id="prevBtn" className="btn btn-dark"
                     disabled={currentPage === 1}
                     onClick={() => fetchBooks(currentPage - 1)}
                   >Prev</button>
@@ -120,7 +119,7 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
                   }
                 </li>
                 <li className='page-item'>
-                  <button id="nextBtn" className="btn btn-secondary page-link"
+                  <button id="nextBtn" className="btn btn-dark"
                     disabled={currentPage === totalPages || 0 === totalPages}
                     onClick={() => fetchBooks(currentPage + 1)}
                   >Next</button>

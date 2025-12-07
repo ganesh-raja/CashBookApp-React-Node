@@ -51,13 +51,15 @@ const CatList = ({ id, cat, setCatTitle, setCatElement }) => {
   }  
 
   return (
-    <li className='cat-list-li'>{cat.name}
-      <button type='button' className="editcat" onClick={() => editCategory(cat._id, cat.name)}
+    <li className='list-group-item d-flex justify-content-between align-items-center'> <strong>{cat.name}</strong>
+      <div className='btn-group'>
+      <button type='button' className="btn btn-warning" onClick={() => editCategory(cat._id, cat.name)}
         data-bs-toggle='modal' data-bs-target='#popup-modal2'  
-      >Edit</button>
-      <button type='button' className="deletecat" onClick={() => deleteCategory(cat._id, cat.name)}
-        data-bs-toggle='modal' data-bs-target='#popup-modal2'
-      >Delete</button>
+      ><i className="bi bi-pencil-square"></i></button>
+      <button type='button' className="btn btn-danger" onClick={() => deleteCategory(cat._id, cat.name)}
+        data-bs-toggle='modal' data-bs-target='#popup-modal2' 
+      ><i className="bi bi-trash"></i></button>
+      </div>
     </li>
   )
 }

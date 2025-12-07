@@ -27,15 +27,17 @@ const InnerRecords = ({ innerItem, id, editRecord, categoryMap, setRecordTitle, 
   return (
     <tr>
       <td>{new Date(innerItem.date).toLocaleDateString()}</td>
-      <td><span className={innerItem.type === "in" ? "badge success" : "badge danger"}>{innerItem.type}</span></td>
+      <td className='text-center'><span className={innerItem.type === "in" ? "badge bg-success" : "badge bg-danger"}>{innerItem.type}</span></td>
       <td>{innerItem.amount}</td>
       <td>{innerItem.category_id ? (categoryMap[innerItem.category_id] || "Unknown") : "-"}</td>
       <td>{innerItem.remarks || ""}</td>
-      <td>
-        <button type='button' className="editrecord" onClick={() => editRecord(innerItem._id)}>Edit</button>
-        <button type='button' className="deletecat" onClick={() => deleteRecord(innerItem._id, innerItem.type, innerItem.amount)}
+      <td className='text-center'>
+        <div className='btn-group'>
+        <button type='button' className="btn btn-warning btn-group" onClick={() => editRecord(innerItem._id)}><i className="bi bi-pencil-square"></i></button>
+        <button type='button' className="btn btn-danger btn-group" onClick={() => deleteRecord(innerItem._id, innerItem.type, innerItem.amount)}
           data-bs-toggle='modal' data-bs-target='#popup-modal1'
-        >Delete</button>
+        ><i className="bi bi-trash"></i></button>
+        </div>
       </td>
     </tr>
   )

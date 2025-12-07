@@ -3,9 +3,8 @@ import React from 'react'
 const PopupModel = ({ api, loginStatus, bookStatus, setBookStatus, modelTitle, formElement, setCurrentPage }) => {
 
     const formSubmit = async (e) => {
-        e.preventDefault();
+        e.preventDefault();        
         
-        const form = document.getElementById("model-form")
         const action = document.getElementById("bookaction").value
         const bookid = document.getElementById("bookid").value
 
@@ -16,8 +15,7 @@ const PopupModel = ({ api, loginStatus, bookStatus, setBookStatus, modelTitle, f
             headers: { Authorization: `Bearer ${loginStatus}` },
             });
 
-            document.getElementById('closetab').click();
-            form.reset();
+            document.getElementById('closetab').click();            
             setBookStatus(!bookStatus);
             return;
 
@@ -42,8 +40,7 @@ const PopupModel = ({ api, loginStatus, bookStatus, setBookStatus, modelTitle, f
                 body: JSON.stringify({ title, description }),
             });
 
-            document.getElementById('closetab').click();
-            form.reset();
+            document.getElementById('closetab').click();            
             setCurrentPage(1);
             setBookStatus(!bookStatus);
             return;
@@ -57,8 +54,7 @@ const PopupModel = ({ api, loginStatus, bookStatus, setBookStatus, modelTitle, f
                 body: JSON.stringify({ title: title, description: description }),
             });
 
-            document.getElementById('closetab').click();
-            form.reset();
+            document.getElementById('closetab').click();            
             setCurrentPage(1);
             setBookStatus(!bookStatus);
             return;

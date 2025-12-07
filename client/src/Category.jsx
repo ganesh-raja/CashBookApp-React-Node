@@ -1,4 +1,4 @@
-import React, { createElement, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import CatList from './CatList'
 import PopupModalCat from './PopupModalCat'
 

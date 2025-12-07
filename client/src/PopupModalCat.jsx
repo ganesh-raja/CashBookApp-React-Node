@@ -4,8 +4,7 @@ const PopupModalCat = ({ api, loginStatus, catTitle, catElement, catActive, setC
 
     const catForm = async (e) => {
         e.preventDefault();
-
-        const form2 = document.getElementById("model-form2")
+        
         const caction = document.getElementById("cataction").value
         const bookid = document.getElementById("bookid").value
         const catid = document.getElementById("catid").value
@@ -18,9 +17,8 @@ const PopupModalCat = ({ api, loginStatus, catTitle, catElement, catActive, setC
             });
             setCatActive(!catActive)
 
-            document.getElementById('closetab2').click();
-            form2.reset();
-            setBookStatus(!bookStatus);
+            document.getElementById('closetab2').click();            
+            setCatActive(!catActive);
             return;
 
         }
@@ -40,8 +38,7 @@ const PopupModalCat = ({ api, loginStatus, catTitle, catElement, catActive, setC
                 body: JSON.stringify({ name }),
             });
             
-            document.getElementById('closetab2').click();
-            form2.reset();
+            document.getElementById('closetab2').click();            
             setCatActive(!catActive);
             return;
 

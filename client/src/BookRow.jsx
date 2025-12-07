@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 
-const BookRow = ({ bookData, api, loginStatus, bookStatus, setBookStatus, setModelTitle, setFormElement }) => {
+const BookRow = ({ bookData, setModelTitle, setFormElement }) => {
 
   const openEditForm = (id, title, desc) => {
     const form = document.getElementById("model-form");
@@ -29,20 +29,7 @@ const BookRow = ({ bookData, api, loginStatus, bookStatus, setBookStatus, setMod
         </div>
       </>
     )
-  }
-
-  // const editBook = async (id, title, desc) => {
-  //   const newTitle = prompt("Edit book title:", title);
-  //   if (!newTitle) return;
-  //   const newDesc = prompt("Edit description:", desc);
-  //   await fetch(`${api}/books/${id}`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json", Authorization: `Bearer ${loginStatus}` },
-  //     body: JSON.stringify({ title: newTitle, description: newDesc }),
-  //   });
-  //   setCurrentPage(1)
-  //   setBookStatus(!bookStatus)
-  // }
+  }  
 
   const openDelForm = (id, title) => {
     const form = document.getElementById("model-form");
@@ -61,16 +48,7 @@ const BookRow = ({ bookData, api, loginStatus, bookStatus, setBookStatus, setMod
         </div>
       </>
     )
-  }
-
-  // const deleteBook = async (id) => {
-  //   if (!confirm("Are you sure to delete?")) return;
-  //   await fetch(`${api}/books/${id}`, {
-  //     method: "DELETE",
-  //     headers: { Authorization: `Bearer ${loginStatus}` },
-  //   });
-  //   setBookStatus(!bookStatus)
-  // }
+  }  
 
   return (
     <tr>

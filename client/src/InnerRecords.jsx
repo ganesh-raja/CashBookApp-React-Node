@@ -22,17 +22,7 @@ const InnerRecords = ({ innerItem, id, editRecord, categoryMap, setRecordTitle, 
         </div>
       </>
     )   
-  }
-
-  // const deleteRecord = async (bid) => {
-  //   if (!confirm("Delete this record?")) return;
-  //   await fetch(`${api}/books/${bookId}/records/${bid}`, {
-  //     method: "DELETE",
-  //     headers: { Authorization: `Bearer ${loginStatus}` },
-  //   });
-  //   loadRecords()
-  //   resetRecord()
-  // }
+  }  
 
   return (
     <tr>

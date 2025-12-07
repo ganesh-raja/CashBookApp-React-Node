@@ -1,6 +1,6 @@
 import React from 'react'
 
-const CatList = ({ id, cat, api, catActive, setCatActive, loginStatus, setCatTitle, setCatElement }) => {
+const CatList = ({ id, cat, setCatTitle, setCatElement }) => {
   const bookId = id
 
  const editCategory = (cid, coldName) => {
@@ -24,18 +24,8 @@ const CatList = ({ id, cat, api, catActive, setCatActive, loginStatus, setCatTit
         </div>
       </>
     )
-  }
+  } 
   
-  // const editCategory = async (id, oldName) => {
-  //   const name = prompt("Edit category:", oldName);
-  //   if (!name) return;
-  //   await fetch(`${api}/books/${bookId}/categories/${id}`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json", Authorization: `Bearer ${loginStatus}` },
-  //     body: JSON.stringify({ name }),
-  //   });
-  //   setCatActive(!catActive)
-  // }
 
   const deleteCategory = (cid, cname) => {
     const form2 = document.getElementById("model-form2");
@@ -57,23 +47,8 @@ const CatList = ({ id, cat, api, catActive, setCatActive, loginStatus, setCatTit
             >Close</button>
         </div>
       </>
-    )
-    
-    // await fetch(`${api}/books/${bookId}/categories/${id}`, {
-    //   method: "DELETE",
-    //   headers: { Authorization: `Bearer ${loginStatus}` },
-    // });
-    // setCatActive(!catActive)
-  }
-
-  // const deleteCategory = async (id) => {
-  //   if (!confirm("Delete this category?")) return;
-  //   await fetch(`${api}/books/${bookId}/categories/${id}`, {
-  //     method: "DELETE",
-  //     headers: { Authorization: `Bearer ${loginStatus}` },
-  //   });
-  //   setCatActive(!catActive)
-  // }
+    )       
+  }  
 
   return (
     <li className='cat-list-li'>{cat.name}

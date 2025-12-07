@@ -24,19 +24,7 @@ const AddBook = ({ setModelTitle, setFormElement }) => {
         </div>
       </>
     );
-  };
-
-  // const BookAdd = async () => {
-  //   const title = prompt("Enter book title:");
-  //   if (!title) return;
-  //   const description = prompt("Enter description:");
-  //   await fetch(`${api}/books`, {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json", Authorization: `Bearer ${loginStatus}` },
-  //     body: JSON.stringify({ title, description }),
-  //   });
-  //   setBookStatus(!bookStatus)
-  // }
+  }  
 
   return (
     <button className="btn add-btn" onClick={openAddForm} type='button' data-bs-toggle='modal' data-bs-target='#popup-modal'>Add Book</button>

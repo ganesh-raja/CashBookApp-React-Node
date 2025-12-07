@@ -4,8 +4,7 @@ const PopupModalInner = ({ api, loginStatus, recordTitle, recordElement, resetRe
 
     const recordDelete = async (e) => {
         e.preventDefault();
-
-        const form1 = document.getElementById("model-form1")
+        
         const action = document.getElementById("action").value
         const bookid1 = document.getElementById("bookid1").value
         const actionid = document.getElementById("actionid").value
@@ -17,8 +16,7 @@ const PopupModalInner = ({ api, loginStatus, recordTitle, recordElement, resetRe
             headers: { Authorization: `Bearer ${loginStatus}` },
             });
 
-            document.getElementById('closetab1').click();
-            form1.reset();
+            document.getElementById('closetab1').click();           
             loadRecords();
             resetRecord();
             return;

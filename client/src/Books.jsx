@@ -53,7 +53,7 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="row justify-content-center w-100">
-        <div className="container border boder-2 rounded p-4">
+        <div className="container border border-0 rounded p-4 bg-white bookcontainer">
           <div className="row mb-3">
             <div className="col-12 text-start">
               <h3>Books</h3>

@@ -20,7 +20,7 @@ const Category = ({ id, api, loginStatus, loadCategory, newCategory, setNewCateg
                   value={newCategory} onChange={(e) => setNewCategory(e.target.value)} required/>
             </div>
             <div className="col-12 col-sm-3 mt-2 mt-sm-0">
-              <button type="submit" className='btn btn-info'><i className="bi bi-plus-square"></i></button>
+              <button type="submit" className='btn btn-primary'><i className="bi bi-plus-square"></i></button>
             </div>
           </div>          
         </form>

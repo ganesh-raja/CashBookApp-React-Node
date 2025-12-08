@@ -1,0 +1,55 @@
+body {
+    background-color: #f5f3ff !important;
+}
+
+.loginFrom,
+.registerFrom,
+.bookcontainer {
+    box-shadow: 0px 1px 3px rgb(50, 50, 50);    
+}
+
+.card {
+    border: none !important;
+    box-shadow: 0px 1px 3px rgb(50, 50, 50);
+}
+
+input:focus,
+select:focus, 
+textarea:focus {
+  border-color: #6b4bff !important;
+  box-shadow: 1px 1px 10px rgb(199 162 255 / 60%) !important;
+}
+
+.loginFrom a,
+.registerFrom a {
+    color: #3100d0 !important;
+    text-decoration: none !important;
+}   
+
+.loginFrom a:hover,
+.registerFrom a:hover{
+    text-decoration: underline !important;
+}
+
+.btn, 
+.alert {
+    transition: all 0.3s ease !important;
+}
+
+.btn:hover, .alert:hover {
+    transform: translateY(-3px);
+}
+
+.btn-outline-primary {    
+    border-color: #a589ff !important;
+    background-color: #a589ff !important;
+    color: white !important;
+}
+
+.btn-outline-primary:hover {
+    background-color: #8a66ff !important;
+}
+
+.text-head {
+    color: #8a66ff !important;
+}

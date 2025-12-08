@@ -27,7 +27,7 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
     document.getElementById("date").value = rec.date.split("T")[0];
     document.getElementById("remarks").value = rec.remarks || "";
     document.getElementById("category").value = rec.category_id || "";
-    document.getElementById("type").focus()
+    document.getElementById("amount").focus()
   }
 
   const loadRecords = async () => {

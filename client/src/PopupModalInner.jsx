@@ -29,7 +29,7 @@ const PopupModalInner = ({ api, loginStatus, recordTitle, recordElement, resetRe
         <div className="modal-dialog">
             <div className="modal-content">
                 <div className="modal-header">
-                    <div className='modal-title'>{recordTitle}</div>
+                    <div className='modal-title'><h5>{recordTitle}</h5></div>
                     <button className='btn-close' data-bs-dismiss='modal' type='button'></button>
                 </div>
                 <div className="modal-body">

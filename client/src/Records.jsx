@@ -6,8 +6,12 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
 
-  let pageNumber = 1  
+  // let pageNumber = 1
+  // let totalPages = 1  
   const bookId = id
+
+  const [pageNumber, setPageNumber] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   const [date, setDate] = useState(new Date());
 
@@ -26,7 +30,7 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
 
     document.getElementById("recordId").value = rec._id;
     document.getElementById("type").value = rec.type;
-    document.getElementById("amount").value = rec.amount;    
+    document.getElementById("amount").value = rec.amount;
     const datetime = new Date(rec.date);
     setDate(datetime);
     document.getElementById("remarks").value = rec.remarks || "";
@@ -43,7 +47,7 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
 
     if (!res.ok) {
       console.error("Failed to fetch book records:", data);
-      LoggedOut();      
+      LoggedOut();
       return;
     }
 
@@ -55,13 +59,21 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
 
     if (!data.data.length) {
       return;
-    }   
+    }
+
+    const newTotalPages = data.pagination.totalPages;
+
+    setTotalPages(newTotalPages);
+
+    document.getElementById("pageInfo").innerText = `Page ${pageNumber} / ${newTotalPages}`;
+    document.getElementById("prevBtn").style.display = pageNumber > 1 ? "block" : "none";
+    document.getElementById("nextBtn").style.display = pageNumber < newTotalPages ? "block" : "none";
 
   }
 
   useEffect(() => {
-    loadRecords()
-  }, [])
+    loadRecords();
+  }, [pageNumber]);
 
   const recordForm = async (e) => {
     e.preventDefault();
@@ -93,23 +105,23 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
     document.getElementById("recordForm").reset();
     document.getElementById("recordId").value = "";
     setDate(new Date())
-  }  
+  }
 
   return (
     <>
       <div className="card mb-3">
         <div className="card-body">
-        <div className="row my-2 text-center">
-          <div className="col-12 col-sm-4 mb-2">
-            <div className="alert alert-success mb-0 p-2 px-3">Cash In: ₹<span id="cashIn"></span></div>
+          <div className="row my-2 text-center">
+            <div className="col-12 col-sm-4 mb-2">
+              <div className="alert alert-success mb-0 p-2 px-3">Cash In: ₹<span id="cashIn"></span></div>
+            </div>
+            <div className="col-12 col-sm-4 mb-2">
+              <div className="alert alert-danger mb-0 p-2 px-3">Cash Out: ₹<span id="cashOut"></span></div>
+            </div>
+            <div className="col-12 col-sm-4 mb-2">
+              <div className="alert alert-info mb-0 p-2 px-3">Total: ₹<span id="totalAmount"></span></div>
+            </div>
           </div>
-          <div className="col-12 col-sm-4 mb-2">
-            <div className="alert alert-danger mb-0 p-2 px-3">Cash Out: ₹<span id="cashOut"></span></div>
-          </div>
-          <div className="col-12 col-sm-4 mb-2">
-            <div className="alert alert-info mb-0 p-2 px-3">Total: ₹<span id="totalAmount"></span></div>
-          </div>
-        </div>
           <h5 className='card-title my-3'>Add / Update Record</h5>
           <form id="recordForm" onSubmit={recordForm}>
             <input type="hidden" id="recordId" />
@@ -124,7 +136,7 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
                   className="form-control custom-date-input"
                   placeholderText="MM-DD-YYYY"
                   required
-                />        
+                />
               </div>
               <div className="col-md-4">
                 <label htmlFor='type' className='form-label'>Type</label>
@@ -136,7 +148,7 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
               <div className="col-md-4">
                 <label htmlFor='amount' className='form-label'>Amount</label>
                 <input type="number" id="amount" className="form-control" required />
-              </div>              
+              </div>
               <div className="col-md-4">
                 <label htmlFor='category' className='form-label'>Category</label>
                 <select id="category" className="form-select"></select>
@@ -158,39 +170,65 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
           <h5 className='card-title'>Records</h5>
         </div>
         <div className="card-body">
-        <div className="table-responsive">
-          <table className='table table-bordered table-hover table-fixed'>
-            <thead className='table-primary text-center'>
-              <tr>
-                <th style={{ "width": "10%" }}>Date</th>
-                <th style={{ "width": "10%" }}>Type</th>
-                <th style={{ "width": "20%" }}>Amount</th>
-                <th style={{ "width": "20%" }}>Category</th>
-                <th style={{ "width": "20%" }}>Remarks</th>
-                <th style={{ "width": "20%" }}>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {records.length > 0 &&
-                records.map(innerItem =>
-                  <InnerRecords key={innerItem._id} api={api} id={id} innerItem={innerItem} loginStatus={loginStatus} editRecord={editRecord}
-                    categoryMap={categoryMap}
-                    resetRecord={resetRecord}
-                    loadRecords={loadRecords}
-                    setRecordTitle={setRecordTitle}
-                    setRecordElement={setRecordElement}
-                  />
-                )
-              }
-              {records.length == 0 &&
-                <tr className='text-center'>
-                  <td colSpan='6'>No books found</td>
+          <div className="table-responsive">
+            <table className='table table-bordered table-hover table-fixed'>
+              <thead className='table-primary text-center'>
+                <tr>
+                  <th style={{ "width": "10%" }}>Date</th>
+                  <th style={{ "width": "10%" }}>Type</th>
+                  <th style={{ "width": "20%" }}>Amount</th>
+                  <th style={{ "width": "20%" }}>Category</th>
+                  <th style={{ "width": "20%" }}>Remarks</th>
+                  <th style={{ "width": "20%" }}>Action</th>
                 </tr>
-              }
-            </tbody>
-          </table>          
+              </thead>
+              <tbody>
+                {records.length > 0 &&
+                  records.map(innerItem =>
+                    <InnerRecords key={innerItem._id} api={api} id={id} innerItem={innerItem} loginStatus={loginStatus} editRecord={editRecord}
+                      categoryMap={categoryMap}
+                      resetRecord={resetRecord}
+                      loadRecords={loadRecords}
+                      setRecordTitle={setRecordTitle}
+                      setRecordElement={setRecordElement}
+                    />
+                  )
+                }
+                {records.length == 0 &&
+                  <tr className='text-center'>
+                    <td colSpan='6'>No books found</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+            <ul className="pagination justify-content-center my-3">
+              <li className={`page-item ${pageNumber === 1 ? "disabled" : ""}`}>
+                <button
+                  type="button"
+                  className="page-link"
+                  onClick={() => pageNumber > 1 && setPageNumber(pageNumber - 1)}
+                >
+                  Prev
+                </button>
+              </li>
+              <li className="page-item disabled">
+                <span className="page-link">
+                  
+                  Page {pageNumber} / {totalPages}
+                </span>
+              </li>
+              <li className={`page-item ${pageNumber === totalPages ? "disabled" : ""}`}>
+                <button
+                  type="button"
+                  className="page-link"
+                  onClick={() => pageNumber < totalPages && setPageNumber(pageNumber + 1)}
+                >
+                  Next
+                </button>
+              </li>
+            </ul>
+          </div>
         </div>
-      </div>
         <PopupModalInner api={api} loginStatus={loginStatus}
           resetRecord={resetRecord}
           loadRecords={loadRecords}

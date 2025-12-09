@@ -139,3 +139,21 @@ textarea:hover {
   background-size: 20px;
   cursor: pointer;
 }
+
+.pagination .page-link {
+  color: black;  
+  box-shadow: 0px 1px 3px rgb(199 162 255 / 60%) !important; 
+  transition: all 0.3s ease !important; 
+}
+
+.pagination .page-link:hover {
+  color: white;
+  background: #a589ff !important; 
+  transform: translateY(-2px); 
+}
+
+.pagination .page-item.disabled .page-link {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none !important;
+}

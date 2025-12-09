@@ -12,7 +12,7 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
   const [bookStatus, setBookStatus] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 2;
+  const limit = 10;
 
   const fetchBooks = async (page = 1) => {
     const res = await fetch(`${api}/books?page=${page}&limit=${limit}`, {
@@ -65,7 +65,6 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
                 setModelTitle={setModelTitle}
                 setFormElement={setFormElement}
               />
-
               <button className="btn btn-outline-danger me-0" onClick={LoggedOut}>Logout</button>
             </div>
           </div>
@@ -96,13 +95,11 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
                 </table>
               </div>
 
-
               <PopupModel api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
                 modelTitle={modelTitle}
                 formElement={formElement}
                 setCurrentPage={setCurrentPage}
               />
-
 
               <ul className="pagination justify-content-center">
                 <li className='page-item'>

@@ -5,9 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
-
-  // let pageNumber = 1
-  // let totalPages = 1  
+    
   const bookId = id
 
   const [pageNumber, setPageNumber] = useState(1);
@@ -62,12 +60,7 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
     }
 
     const newTotalPages = data.pagination.totalPages;
-
     setTotalPages(newTotalPages);
-
-    document.getElementById("pageInfo").innerText = `Page ${pageNumber} / ${newTotalPages}`;
-    document.getElementById("prevBtn").style.display = pageNumber > 1 ? "block" : "none";
-    document.getElementById("nextBtn").style.display = pageNumber < newTotalPages ? "block" : "none";
 
   }
 

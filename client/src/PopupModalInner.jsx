@@ -1,4 +1,5 @@
 import React from 'react'
+import { toast } from 'react-toastify';
 
 const PopupModalInner = ({ api, loginStatus, recordTitle, recordElement, resetRecord, loadRecords }) => {
 
@@ -16,7 +17,8 @@ const PopupModalInner = ({ api, loginStatus, recordTitle, recordElement, resetRe
             headers: { Authorization: `Bearer ${loginStatus}` },
             });
 
-            document.getElementById('closetab1').click();           
+            document.getElementById('closetab1').click();
+            toast.error("The record has been removed.", { autoClose:2000 })           
             loadRecords();
             resetRecord();
             return;

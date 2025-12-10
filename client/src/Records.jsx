@@ -3,6 +3,7 @@ import InnerRecords from './InnerRecords'
 import PopupModalInner from './PopupModalInner'
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { toast } from 'react-toastify';
 
 const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
     
@@ -82,13 +83,20 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
     const url = id
       ? `${api}/books/${bookId}/records/${id}`
       : `${api}/books/${bookId}/records`;
-    const method = id ? "PUT" : "POST";
+    const method = id ? "PUT" : "POST";     
 
     await fetch(url, {
       method,
       headers: { "Content-Type": "application/json", Authorization: `Bearer ${loginStatus}` },
       body: JSON.stringify(payload),
     });
+
+    if (method === "PUT") {
+      toast.warning("Record details have been updated.", { autoClose:2000 })
+    }
+    else{
+      toast.info("A new record has been added.", { autoClose:2000 })
+    }
 
     resetRecord();
     loadRecords();

@@ -1,4 +1,5 @@
 import React from 'react'
+import { toast } from 'react-toastify';
 
 const PopupModalCat = ({ api, loginStatus, catTitle, catElement, catActive, setCatActive }) => {
 
@@ -17,7 +18,8 @@ const PopupModalCat = ({ api, loginStatus, catTitle, catElement, catActive, setC
             });
             setCatActive(!catActive)
 
-            document.getElementById('closetab2').click();            
+            document.getElementById('closetab2').click();
+            toast.error("The category has been removed.", { autoClose:2000 })            
             setCatActive(!catActive);
             return;
 
@@ -38,7 +40,8 @@ const PopupModalCat = ({ api, loginStatus, catTitle, catElement, catActive, setC
                 body: JSON.stringify({ name }),
             });
             
-            document.getElementById('closetab2').click();            
+            document.getElementById('closetab2').click();
+            toast.warning("Category details have been updated.", { autoClose:2000 })            
             setCatActive(!catActive);
             return;
 

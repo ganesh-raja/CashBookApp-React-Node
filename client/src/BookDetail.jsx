@@ -75,17 +75,16 @@ const BookDetail = ({ api, loginStatus, LoggedOut, bookName }) => {
           <button type='button' className="btn btn-outline-danger" onClick={LoggedOut}>Logout</button>
         </div> 
         <div className="col-12">
-        <div className="card">
+        <div className="card headcontainer">
           <div className="card-body">
-            <div className="row">
-              <div className="col-12 col-sm-6 text-stast text-sm-end">
-                <h4>Book</h4>
-              </div>
-              {bookTitle &&
-              <div className="col-12 col-sm-6">
-                <h4><span className='text-success'><strong>{bookTitle || ""}</strong></span></h4>
-              </div>
+            <div className="row ">
+              <div className="col-12 text-center">
+                <h3><strong className='text-secondary'>Book</strong>             
+              {bookTitle &&              
+                <strong className='text-head'> - {bookTitle || ""}</strong>
               }
+              </h3>
+              </div>              
             </div>
           </div>
         </div>    

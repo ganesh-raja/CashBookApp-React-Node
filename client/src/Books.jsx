@@ -12,7 +12,7 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
   const [bookStatus, setBookStatus] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const limit = 2;
+  const limit = 10;
 
   const fetchBooks = async (page = 1) => {
     const res = await fetch(`${api}/books?page=${page}&limit=${limit}`, {
@@ -53,7 +53,7 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">
       <div className="row justify-content-center w-100">
-        <div className="container border boder-2 rounded p-4">
+        <div className="container border border-0 rounded p-4 bg-white bookcontainer">
           <div className="row mb-3">
             <div className="col-12 text-start">
               <h3>Books</h3>
@@ -65,13 +65,12 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
                 setModelTitle={setModelTitle}
                 setFormElement={setFormElement}
               />
-
               <button className="btn btn-outline-danger me-0" onClick={LoggedOut}>Logout</button>
             </div>
           </div>
           <div className="row mb-3">
             <div className="col">
-              <div className="table-responsive table-rounded">
+              <div className="table-responsive table-rounded mt-3">
                 <table className="table table-bordered table-hover table-fixed">
                   <thead className='table-primary text-center'>
                     <tr>
@@ -96,31 +95,29 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
                 </table>
               </div>
 
-
               <PopupModel api={api} loginStatus={loginStatus} bookStatus={bookStatus} setBookStatus={setBookStatus}
                 modelTitle={modelTitle}
                 formElement={formElement}
                 setCurrentPage={setCurrentPage}
               />
 
-
-              <ul className="pagination justify-content-center">
-                <li className='page-item'>
-                  <button id="prevBtn" className="btn btn-dark"
-                    disabled={currentPage === 1}
+              <ul className="pagination justify-content-center mt-3">
+                <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                  <button id="prevBtn" type='button'
+                    className='page-link'                    
                     onClick={() => fetchBooks(currentPage - 1)}
                   >Prev</button>
                 </li>
-                <li className='page-item m-2'>
+                <li className='page-item disabled'>
                   {totalPages > 0 &&
-                    <span id="pageInfo" className="">
-                      <strong>Page {currentPage} of {totalPages}</strong>
+                    <span className="page-link" id='page-info'>
+                      Page {currentPage} of {totalPages}
                     </span>
-                  }
+                  }                  
                 </li>
-                <li className='page-item'>
-                  <button id="nextBtn" className="btn btn-dark"
-                    disabled={currentPage === totalPages || 0 === totalPages}
+                <li className={`page-item ${currentPage === totalPages || 0 === totalPages ? "disabled" : ""}`}>
+                  <button id="nextBtn" type='button'
+                    className='page-link'                    
                     onClick={() => fetchBooks(currentPage + 1)}
                   >Next</button>
                 </li>

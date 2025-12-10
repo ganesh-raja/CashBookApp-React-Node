@@ -57,8 +57,8 @@ const Register = ({ api, navigate }) => {
     return (
         <div className="container d-flex justify-content-center align-items-center vh-100">
             <div className="row justify-content-center w-100">
-                <div className="col-12 col-lg-4 p-4 border border-2 rounded">
-                    <form className='registerFrom' onSubmit={RegisterSubmit}>
+                <div className="col-12 col-lg-4 p-4 border border-0 rounded bg-white registerFrom">
+                    <form onSubmit={RegisterSubmit}>
                         <div className='text-center'>
                             <h4>Create Account</h4>
                             {regSuccess && <span className='text-success'>{regSuccess}</span>}
@@ -86,7 +86,7 @@ const Register = ({ api, navigate }) => {
                                 onChange={(e) => setRegPass(e.target.value)}
                             />
                         </div>
-                        <div className='mt-3 text-center'>
+                        <div className='mt-4 text-center'>
                             <button type='submit' className='btn btn-outline-primary'>Register</button>
                         </div>
                         <div className='mt-3 text-center'>

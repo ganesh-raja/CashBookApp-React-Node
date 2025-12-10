@@ -11,7 +11,7 @@ const InnerRecords = ({ innerItem, id, editRecord, categoryMap, setRecordTitle, 
     setRecordElement(
       <>
         <div className="mb-2">          
-          <span><i>Record (Type / Amount): </i><strong>{rtype.toUpperCase()+" / ₹"+ramt}</strong></span>
+          <span><i>Record (Type / Amount):  </i><strong>{rtype.toUpperCase()+" / ₹"+ramt}</strong></span>
         </div>              
         <input type="hidden" id="action" defaultValue="RDELETE"/> 
         <input type="hidden" id="bookid1" defaultValue={bookId}/> 

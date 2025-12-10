@@ -38,12 +38,11 @@ textarea:hover {
     text-decoration: underline !important;
 }
 
-.btn, 
-.alert {
+.btn {
     transition: all 0.3s ease !important;
 }
 
-.btn:hover, .alert:hover {
+.btn:hover {
     transform: translateY(-3px);
 }
 
@@ -156,4 +155,8 @@ textarea:hover {
   opacity: 0.5;
   cursor: not-allowed;
   box-shadow: none !important;
+}
+
+#page-info {
+  opacity: 1 !important;
 }

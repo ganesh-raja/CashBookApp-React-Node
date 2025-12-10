@@ -205,8 +205,7 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
                 </button>
               </li>
               <li className="page-item disabled">
-                <span className="page-link">
-                  
+                <span className="page-link" id='page-info'>                  
                   Page {pageNumber} / {totalPages}
                 </span>
               </li>

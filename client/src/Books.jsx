@@ -70,7 +70,7 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
           </div>
           <div className="row mb-3">
             <div className="col">
-              <div className="table-responsive table-rounded">
+              <div className="table-responsive table-rounded mt-3">
                 <table className="table table-bordered table-hover table-fixed">
                   <thead className='table-primary text-center'>
                     <tr>
@@ -101,23 +101,23 @@ const Books = ({ api, loginStatus, LoggedOut, setBookName }) => {
                 setCurrentPage={setCurrentPage}
               />
 
-              <ul className="pagination justify-content-center">
-                <li className='page-item'>
-                  <button id="prevBtn" className="btn btn-dark"
-                    disabled={currentPage === 1}
+              <ul className="pagination justify-content-center mt-3">
+                <li className={`page-item ${currentPage === 1 ? "disabled" : ""}`}>
+                  <button id="prevBtn" type='button'
+                    className='page-link'                    
                     onClick={() => fetchBooks(currentPage - 1)}
                   >Prev</button>
                 </li>
-                <li className='page-item m-2'>
+                <li className='page-item disabled'>
                   {totalPages > 0 &&
-                    <span id="pageInfo" className="">
-                      <strong>Page {currentPage} of {totalPages}</strong>
+                    <span className="page-link" id='page-info'>
+                      Page {currentPage} of {totalPages}
                     </span>
-                  }
+                  }                  
                 </li>
-                <li className='page-item'>
-                  <button id="nextBtn" className="btn btn-dark"
-                    disabled={currentPage === totalPages || 0 === totalPages}
+                <li className={`page-item ${currentPage === totalPages || 0 === totalPages ? "disabled" : ""}`}>
+                  <button id="nextBtn" type='button'
+                    className='page-link'                    
                     onClick={() => fetchBooks(currentPage + 1)}
                   >Next</button>
                 </li>

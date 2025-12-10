@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router';
+import { toast } from 'react-toastify';
 
 const Register = ({ api, navigate }) => {
     const [regName, setRegName] = useState("")
@@ -18,8 +19,8 @@ const Register = ({ api, navigate }) => {
 
         const email = document.getElementById("remail")
 
-        if (!isValidEmail(regEmail)) {
-            alert("Please enter a valid email address.");
+        if (!isValidEmail(regEmail)) {            
+            toast.warning("Please enter a valid email address.", { autoClose: 2000 })
             email.focus();
             return;
         }
@@ -35,6 +36,7 @@ const Register = ({ api, navigate }) => {
 
             if (data.status === 1 || data.message?.toLowerCase().includes("success")) {
                 setRegSuccess(data.message || "Registration successful! Redirecting to login...");
+                toast.success("Your account has been created!", { autoClose:2000 })
                 setRegError("");
                 setTimeout(() => {
                     navigate("/login")

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router'
 import { useState, useEffect } from 'react'
+import { toast } from 'react-toastify';
 
 const Login = ({ api, navigate, setLoginStatus }) => {
 
@@ -31,15 +32,16 @@ const Login = ({ api, navigate, setLoginStatus }) => {
         setLoginStatus(data.token)
         setLogError("")
         navigate("/")
+        toast.success("Logged in successfully!", { autoClose: 2000 })
       }
       else {
-        setLogError(data.message || "Login failed")
+        setLogError(data.message || "Login failed")         
       }
 
     } catch (err) {
-      setLogError(err.response.data.message || "Login failed")
+      setLogError(err.response.data.message || "Login failed")      
     }
-  }
+  }  
 
   return (
     <div className="container d-flex justify-content-center align-items-center vh-100">

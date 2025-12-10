@@ -1,4 +1,5 @@
 import React from 'react'
+import { toast } from 'react-toastify';
 
 const PopupModel = ({ api, loginStatus, bookStatus, setBookStatus, modelTitle, formElement, setCurrentPage }) => {
 
@@ -15,7 +16,8 @@ const PopupModel = ({ api, loginStatus, bookStatus, setBookStatus, modelTitle, f
             headers: { Authorization: `Bearer ${loginStatus}` },
             });
 
-            document.getElementById('closetab').click();            
+            document.getElementById('closetab').click();
+            toast.error("The book has been removed.", { autoClose:2000 })             
             setBookStatus(!bookStatus);
             return;
 
@@ -40,7 +42,8 @@ const PopupModel = ({ api, loginStatus, bookStatus, setBookStatus, modelTitle, f
                 body: JSON.stringify({ title, description }),
             });
 
-            document.getElementById('closetab').click();            
+            document.getElementById('closetab').click();
+            toast.info("A new book has been added.", { autoClose:2000 })             
             setCurrentPage(1);
             setBookStatus(!bookStatus);
             return;
@@ -54,7 +57,8 @@ const PopupModel = ({ api, loginStatus, bookStatus, setBookStatus, modelTitle, f
                 body: JSON.stringify({ title: title, description: description }),
             });
 
-            document.getElementById('closetab').click();            
+            document.getElementById('closetab').click();
+            toast.warning("Book details have been updated.", { autoClose:2000 })            
             setCurrentPage(1);
             setBookStatus(!bookStatus);
             return;

@@ -6,6 +6,7 @@ import Home from './Home';
 import Books from './Books';
 import BookDetail from './BookDetail';
 import Error from './Error';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const navigate = useNavigate();
@@ -20,9 +21,8 @@ function App() {
     }
   }, [loginStatus])
 
-  const LoggedOut = () => {
-    // if (!confirm("Are you sure to logout?")) return    
-    localStorage.removeItem("cashbook_token")
+  const LoggedOut = () => {       
+    localStorage.removeItem("cashbook_token")    
     setLoginStatus(null)
   }
 
@@ -54,7 +54,8 @@ function App() {
           />} />
         </Route>
         <Route path="*" element={<Error />} />        
-      </Routes>            
+      </Routes>
+      <ToastContainer />            
     </>
   )
 }

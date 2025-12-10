@@ -3,6 +3,7 @@ import { Link, useParams } from 'react-router'
 import Category from './Category'
 import Records from './Records'
 import PopupModel from './PopupModel'
+import { toast } from 'react-toastify'
 
 const BookDetail = ({ api, loginStatus, LoggedOut, bookName }) => {
   const { id } = useParams()   
@@ -33,6 +34,7 @@ const BookDetail = ({ api, loginStatus, LoggedOut, bookName }) => {
       body: JSON.stringify({ name: newCategory }),
     });
     setNewCategory("")
+    toast.info("A new category has been added.", { autoClose:2000 })
     setCatActive(!catActive)
   }
 

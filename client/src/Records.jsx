@@ -72,9 +72,17 @@ const Records = ({ api, loginStatus, id, categoryMap, LoggedOut }) => {
   const recordForm = async (e) => {
     e.preventDefault();
     const id = document.getElementById("recordId").value;
+    const amount = parseFloat(document.getElementById("amount").value);
+    
+    if (amount === 0 || isNaN(amount)) {
+      toast.warning("Enter amount value");
+      document.getElementById("amount").focus();
+      return
+    }      
+
     const payload = {
       type: document.getElementById("type").value,
-      amount: parseFloat(document.getElementById("amount").value),
+      amount: Math.abs(amount),
       date: document.getElementById("date").value,
       remarks: document.getElementById("remarks").value,
       category_id: document.getElementById("category").value || null,
